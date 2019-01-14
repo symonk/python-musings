@@ -58,3 +58,23 @@ a = False : a not True # True
 1 == 3 or 2 == 5 # False
 not False # True
 
+-------------------------------------------------------------------------------------------------------------
+
+# 'assert' keyword is primarily used for debugging / testing
+# if the assertion resolves to True nothing happens, else an AssertionError is raised
+a = 10
+assert a > 25 # AssertionError
+assert a < 15 # Nothing
+
+# We can also provide a message to the assertion error:
+assert a > 25, "Error: a is not greater than 25!"
+
+# 'assert' can be thought of as this:
+if not condition:
+    raise AssertionError(message)
+
+-------------------------------------------------------------------------------------------------------------
+
+# 'break' like most languages is used to break out of the most innerloop
+# 'continue' like most languages is used to break out and enter the next loop iteration
+# switch-case statements don't seem to exist in python
