@@ -35,5 +35,10 @@ x == y # True
 
 -------------------------------------------------------------------------------------------------------------
 
+# 'and', 'or', 'not' are the logical operators in python and will result in true if both operands are true
+# see truth tables for each below:
 
-
+a = True, b = True, => a and b # True
+a = False, b = True => a and b # False
+a = True, b = False => a and b # False
+a = False, b = False => a and b # False (*careful here)
