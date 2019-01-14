@@ -96,3 +96,36 @@ for i in range(15):
 # results in => '1,2,4,5,7,8,10,11,13,14 printed to console and the loop skipping the print on divisible by 3 numbers
 
 -------------------------------------------------------------------------------------------------------------
+
+# 'class' is used to define a new user-defined class in python
+# classes like any language are used to achieve OOP, they consist of instance variables (state) and methods (behaviour)
+# they can also contain static / class vars and methods, we will discuss more on that later.
+# it is good practice when not extending a class to explicitly extend object (like most OOP languages do implicitly)
+
+class SimonClass(object):
+
+-------------------------------------------------------------------------------------------------------------
+
+# 'def' is used to declare a new function (define if you will)
+# here we define a function called 'do_something' that multiplies two numbers and returns their value
+
+def do_something(self, first : int, second : int = 5) -> int:
+    result = first * second
+    print(result)
+    return result
+
+-------------------------------------------------------------------------------------------------------------
+
+# 'del' is a surprisingly one if you come from a static typed language like java
+# everything in python is an object, everything.  del is used to delete a reference to an object
+this_value_will_be_deleted = 10
+print(this_value_will_be_deleted) # prints 10
+del this_value_will_be_deleted # ?? weird
+print(this_value_will_be_deleted) # error
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module
+NameError: name 'this_value_will_be_deleted' is not defined
+
+-------------------------------------------------------------------------------------------------------------
+
