@@ -78,3 +78,21 @@ if not condition:
 # 'break' like most languages is used to break out of the most innerloop
 # 'continue' like most languages is used to break out and enter the next loop iteration
 # switch-case statements don't seem to exist in python
+
+# 'break' in action:
+for i in range(10):
+    if i == 5:
+        break
+    print(i)
+
+# results in => '1,2,3,4' printed to console and the loop completely terminated
+
+# 'continue' in action:
+for i in range(15):
+    if i % 3 == 0:
+        continue
+    print(i)
+
+# results in => '1,2,4,5,7,8,10,11,13,14 printed to console and the loop skipping the print on divisible by 3 numbers
+
+-------------------------------------------------------------------------------------------------------------
