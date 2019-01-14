@@ -116,7 +116,7 @@ def do_something(self, first : int, second : int = 5) -> int:
 
 -------------------------------------------------------------------------------------------------------------
 
-# 'del' is a surprisingly one if you come from a static typed language like java
+# 'del' is a surprising one if you come from a static typed language like java
 # everything in python is an object, everything.  del is used to delete a reference to an object
 this_value_will_be_deleted = 10
 print(this_value_will_be_deleted) # prints 10
