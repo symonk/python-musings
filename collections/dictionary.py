@@ -42,24 +42,24 @@ dict.copy():
 dict.fromkeys():
 
 ```python
->>> a = dict.fromkeys(list)
->>> a
-{1: None, 2: None, 3: None, 4: None, 5: None}
->>> a = dict.fromkeys(list, 1337)
->>> a
-{1: 1337, 2: 1337, 3: 1337, 4: 1337, 5: 1337}
+    >>> a = dict.fromkeys(list)
+    >>> a
+    {1: None, 2: None, 3: None, 4: None, 5: None}
+    >>> a = dict.fromkeys(list, 1337)
+    >>> a
+    {1: 1337, 2: 1337, 3: 1337, 4: 1337, 5: 1337}
 ```
 
 dict.get():
 
 ```python
->>> d = dict(zip(range(1,10), range(1,10)))
->>> d
-{1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}
->>> d.get(10) # returns None
->>> d.get('a') # returns None
->>> d.get(10, 'Default')
-'Default'
+    >>> d = dict(zip(range(1,10), range(1,10)))
+    >>> d
+    {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}
+    >>> d.get(10) # returns None
+    >>> d.get('a') # returns None
+    >>> d.get(10, 'Default')
+    'Default'
 ```
 
 -------------------------------------------------------------------------------------------------------------
