@@ -51,7 +51,20 @@ the_dict.update() # performs an in-place update to the dict (@caveat: returns No
 # Operations in action
 dict.clear():
 
+```python
+    >>> d = {1:1, 2:2, 3:3}
+    >>> d
+    {1: 1, 2: 2, 3: 3}
+    >>> d.clear()
+    >>> d
+    {}
+```
+
+---
+
 dict.copy():
+
+---
 
 dict.fromkeys():
 
@@ -64,6 +77,8 @@ dict.fromkeys():
     {1: 1337, 2: 1337, 3: 1337, 4: 1337, 5: 1337}
 ```
 
+---
+
 dict.get():
 
 ```python
@@ -75,6 +90,8 @@ dict.get():
     >>> d.get(10, 'Default')
     'Default'
 ```
+
+---
 
 dict.pop():
 
@@ -92,6 +109,8 @@ dict.pop():
     KeyError: 'key-error'
 ```
 
+---
+
 dict.popitem():
 
 ```python
@@ -103,6 +122,8 @@ dict.popitem():
       File "<stdin>", line 1, in <module>
     KeyError: 'popitem(): dictionary is empty'
 ```
+
+---
 
 dict.setdefault():
 
@@ -117,6 +138,8 @@ dict.setdefault():
     >>> d
     {1: 1, 2: 2, 3: 3, 4: 'default'}
 ```
+
+---
 
 dict.update():
 
@@ -140,17 +163,18 @@ dict.update():
 -------------------------------------------------------------------------------------------------------------
 # Operations in terms of Big-O:
 
-
 -------------------------------------------------------------------------------------------------------------
 # Dictionary Comprehensions
-
-
-
 
 -------------------------------------------------------------------------------------------------------------
 # Various flavours of dictionaries
 
 # orderedDict, chained etc
 
+-------------------------------------------------------------------------------------------------------------
+# Simple problems with dictionaries, with solutions
+
+-------------------------------------------------------------------------------------------------------------
+# More on hashing, how it works and the collision algorithm explained
 
 -------------------------------------------------------------------------------------------------------------
