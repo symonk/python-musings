@@ -13,6 +13,10 @@
  # Note 8: Dictionaries keys MUST be unique, duplicate value(s) is acceptable
  # Note 9: Dictionary keys must be immutable (if the hash of the key changes, the dictionary would be screwed)
  # Note 10: To use custom object types as dictionary keys, they should implement both __eq__ and __hash__ (__ne__ too if you want)
+ # Note 11: Dictionaries can be nested, as in contain dictionaries of dictionaries of dictionaries, not keys of course, dicts aren't hashable!
+ # Note 12: In Python 3 Dict: .items(), .keys(), .values() returns 'View' Object that we can iterative over, to avoid building a list to iterate on for better efficiency
+ # Note 13: .clear() sets the dict size to 72 bytes (not 240) as it re-wired to a statically allocated empty key-space (C-code)
+ # Note 14: popitem() as of python 3.7 is now guaranteed LIFO removal as the insertion order is guaranteed as per Note: 2
 
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
@@ -31,8 +35,11 @@ the_dict.clear() # completely empties the dictionary, leaving an empty dictionar
 the_dict.copy() # creates a 'shallow' copy of the items, by shallow copy we mean the contents of the dictionary is not copied by value, instead just creating a new reference
 the_dict.fromkeys() # creates a new dictionary from a sequence of 'keys', value= can be set to override the default of None
 the_dict.get() # retrieve an item from the dictionary, returns None if the key is not found, so no KeyError raised, supports a default value
-the_dict.items() # returns an instance of dict_items which
-
+the_dict.items() # returns an instance of dict_items (view) which
+the_dict.keys() # returns an instance of dict_keys (view) which
+the_dict.values() # returns an instance of dict_values (view) which
+the_dict.pop() # removes the specified key in the dictionary and returns its value.  Raises a KeyError on non existent key, unless default is provided
+the_dict.popitem() # removes the last entry of a dict, returning its key and value pair in a tuple, returns KeyError if dict is empty
 -------------------------------------------------------------------------------------------------------------
 # Operations in action
 dict.clear():
@@ -60,6 +67,34 @@ dict.get():
     >>> d.get('a') # returns None
     >>> d.get(10, 'Default')
     'Default'
+```
+
+dict.pop():
+
+```python
+    >>> d = {'pop': 1, 'pop2': 2}
+    >>> d.pop('pop2')
+    2
+    >>> d
+    {'pop': 1}
+    >>> d.pop('popper', 'def')
+    'def'
+    >>> d.pop('key-error')
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    KeyError: 'key-error'
+```
+
+dict.popitem():
+
+```python
+    >>> d = {'one': 1}
+    >>> d.popitem()
+    ('one', 1)
+    >>> d.popitem()
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    KeyError: 'popitem(): dictionary is empty'
 ```
 
 -------------------------------------------------------------------------------------------------------------
