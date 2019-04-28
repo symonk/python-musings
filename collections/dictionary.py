@@ -20,6 +20,7 @@
  # Note 15: .update() performs an in-place update, returning None (just like list appending etc)
  # Note 16: .update() overrides existing keys with the newer value, non existent keys will be added
  # Note 17: dict **kwargs instantiation is only viable when the keys are simple strings
+ # Note 18: Dictionary views (keys, items, values) are a 'window' into the dict and reflect any change(s) in real time. they are iterable and do not build lists when iterating
 
 
 -------------------------------------------------------------------------------------------------------------
@@ -100,6 +101,18 @@ dict.get():
     >>> d.get('a') # returns None
     >>> d.get(10, 'Default')
     'Default'
+```
+
+dict.keys() && dict.values() && dict.items():
+
+```python
+    >>> d = {1:1, 2:2, 3:3}
+    >>> d.items()
+    dict_items([(1, 1), (2, 2), (3, 3)])
+    >>> d.keys()
+    dict_keys([1, 2, 3])
+    >>> d.values()
+    dict_values([1, 2, 3])
 ```
 
 ---
