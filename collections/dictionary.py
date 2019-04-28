@@ -21,7 +21,7 @@
  # Note 16: .update() overrides existing keys with the newer value, non existent keys will be added
  # Note 17: dict **kwargs instantiation is only viable when the keys are simple strings
  # Note 18: Dictionary views (keys, items, values) are a 'window' into the dict and reflect any change(s) in real time. they are iterable and do not build lists when iterating
-
+ # Note 19: Even with python3 view efficiency changes, `x in dict` is king for checking if a key exists in a dictionary
 
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
@@ -187,21 +187,13 @@ dict.update():
 # Dictionaries, backed by hash tables are extremely efficient for updating, inserting
 big_o_dict = {}
 
-big_o_dict.clear() -> O(1) # similar to big_o_dict = {} or big_o_dict = dict()
-big_o_dict.copy() -> #
-big_o_dict.fromkeys() -> #
-big_o_dict.get() -> O(1) #
-big_o_dict.items() ->
-big_o_dict.keys() ->
-big_o_dict.values() ->
-big_o_dict.pop() -> O(1) # Lookup is very efficient
-big_o_dict.popitem() -> O(1) # returns last item (LIFO)
-big_o_dict.setdefault() -> O(1)
-big_o_dict.update() ->
-del big_o_dict[key] ->
-len(big_o_dict) -> O(1) # Python is smart, these objects all keep track of their own lengths
-construction = {...} || construction = dict(...) ->
-for k,v in big_o_dict.items(): O(N) # Obviously ,we need to iterate the collection so N being the len of the dict
+| Operation   | Average Case | Worst Case |
+|-------------|--------------|------------|
+| Copy        | O(N)         | O(N)       |
+| Get         | O(1)         | O(N)       |
+| Set         | O(1)         | O(N)       |
+| Delete      | O(1)         | O(N)       |
+| Instantiate | O(N)         | O(N)       |
 
 -------------------------------------------------------------------------------------------------------------
 # Dictionary Comprehensions
