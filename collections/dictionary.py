@@ -1,6 +1,6 @@
 #  Find here some interesting facts and learning material on the python dictionary
 
-# Python dictionaries are collection(s) that are backed by a hash table (with build in collision algorithms) if you are
+# Python dictionaries are collection(s) that are backed by a hash table (with built in collision algorithms) if you are
 # familiar with the likes of java, they are your hash map -> a hash table backed collection of key value pairs
 
  # Note 1: Dictionaries are 'mutable' so you need not know all entries in advance
