@@ -184,6 +184,24 @@ dict.update():
 
 -------------------------------------------------------------------------------------------------------------
 # Operations in terms of Big-O:
+# Dictionaries, backed by hash tables are extremely efficient for updating, inserting
+big_o_dict = {}
+
+big_o_dict.clear() -> O(1) # similar to big_o_dict = {} or big_o_dict = dict()
+big_o_dict.copy() -> #
+big_o_dict.fromkeys() -> #
+big_o_dict.get() -> O(1) #
+big_o_dict.items() ->
+big_o_dict.keys() ->
+big_o_dict.values() ->
+big_o_dict.pop() -> O(1) # Lookup is very efficient
+big_o_dict.popitem() -> O(1) # returns last item (LIFO)
+big_o_dict.setdefault() -> O(1)
+big_o_dict.update() ->
+del big_o_dict[key] ->
+len(big_o_dict) -> O(1) # Python is smart, these objects all keep track of their own lengths
+construction = {...} || construction = dict(...) ->
+for k,v in big_o_dict.items(): O(N) # Obviously ,we need to iterate the collection so N being the len of the dict
 
 -------------------------------------------------------------------------------------------------------------
 # Dictionary Comprehensions
