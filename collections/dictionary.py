@@ -22,6 +22,7 @@
  # Note 17: dict **kwargs instantiation is only viable when the keys are simple strings
  # Note 18: Dictionary views (keys, items, values) are a 'window' into the dict and reflect any change(s) in real time. they are iterable and do not build lists when iterating
  # Note 19: Even with python3 view efficiency changes, `x in dict` is king for checking if a key exists in a dictionary
+ # Note 20: Always favour {} over dict() unless {} does not fit your use case, performance gains (while minor) can be had
 
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
