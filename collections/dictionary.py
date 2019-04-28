@@ -24,7 +24,6 @@ dict_from_only_keys = dict.fromkeys(['one', 'two', 'three'], 'default') # dict o
 dict_from_zipped_lists = dict(zip(['a', 'b', 'c'], [1,2,3])) # dict of len 3, from 2x zipped lists
 
 -------------------------------------------------------------------------------------------------------------
-
 # Operations
 the_dict = {}
 
@@ -35,7 +34,6 @@ the_dict.get() # retrieve an item from the dictionary, returns None if the key i
 the_dict.items() # returns an instance of dict_items which
 
 -------------------------------------------------------------------------------------------------------------
-
 # Operations in action
 dict.clear():
 
@@ -64,21 +62,17 @@ dict.get():
 'Default'
 ```
 
-
 -------------------------------------------------------------------------------------------------------------
-
 # Operations in terms of Big-O:
 
 
 -------------------------------------------------------------------------------------------------------------
-
 # Dictionary Comprehensions
 
 
 
 
 -------------------------------------------------------------------------------------------------------------
-
 # Various flavours of dictionaries
 
 # orderedDict, chained etc
