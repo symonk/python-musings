@@ -1,3 +1,3 @@
-# from-java-to-python-cross-learningz
+# Python cross training documentation
 
-A repo to document learnings from cross training in python.  Anything that is a caveat or awesome from someone moving from a java background
+I correlate anything of interest here while cross training in python, hopefully you can learn a thing or two too

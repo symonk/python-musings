@@ -1,11 +1,19 @@
 #  Find here some interesting facts and learning material on the python dictionary
 
-
- # Python dictionaries are collection(s) that are backed by a hash table (with build in collision algorithms) if you are
+# Python dictionaries are collection(s) that are backed by a hash table (with build in collision algorithms) if you are
 # familiar with the likes of java, they are your hash map -> a hash table backed collection of key value pairs
 
+ # Note 1: Dictionaries are 'mutable' so you need not know all entries in advance
+ # Note 2: As of python 3.7 dictionaries maintain their insertion order
+ # Note 3: Dictionaries hold an internal size of '8' on instantiation
+ # Note 4: Dictionaries acquire 240 bytes in memory (8 slots) on instantiation of an empty dict
+ # Note 5: Dictionaries auto-resize when they are two-thirds full, 66% auto resizing occurs
+ # Note 6: Shrinking dictionaries with 'del' will not make the dict smaller, dummy keys must be kept in memory to resolve hash collisions
+ # Note 7: Dictionaries are heterogenerous, you can store anything you like (minus a few caveats)
+ # Note 8: Dictionaries keys MUST be unique, duplicate value(s) is acceptable
+ # Note 9: Dictionary keys must be immutable (if the hash of the key changes, the dictionary would be screwed)
+ # Note 10: To use custom object types as dictionary keys, they should implement both __eq__ and __hash__ (__ne__ too if you want)
 
- # dictionaries are 'mutable' so you need not know all entries in advance (unlike tuples)
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
 empty_dict_a = dict() # empty dict
@@ -24,7 +32,7 @@ the_dict.clear() # completely empties the dictionary, leaving an empty dictionar
 the_dict.copy() # creates a 'shallow' copy of the items, by shallow copy we mean the contents of the dictionary is not copied by value, instead just creating a new reference
 the_dict.fromkeys() # creates a new dictionary from a sequence of 'keys', value= can be set to override the default of None
 the_dict.get() # retrieve an item from the dictionary, returns None if the key is not found, so no KeyError raised, supports a default value
-the_dict.items()
+the_dict.items() # returns an instance of dict_items which
 
 -------------------------------------------------------------------------------------------------------------
 
@@ -67,6 +75,13 @@ dict.get():
 # Dictionary Comprehensions
 
 
+
+
+-------------------------------------------------------------------------------------------------------------
+
+# Various flavours of dictionaries
+
+# orderedDict, chained etc
 
 
 -------------------------------------------------------------------------------------------------------------
