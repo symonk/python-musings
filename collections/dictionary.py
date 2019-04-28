@@ -16,7 +16,11 @@
  # Note 11: Dictionaries can be nested, as in contain dictionaries of dictionaries of dictionaries, not keys of course, dicts aren't hashable!
  # Note 12: In Python 3 Dict: .items(), .keys(), .values() returns 'View' Object that we can iterative over, to avoid building a list to iterate on for better efficiency
  # Note 13: .clear() sets the dict size to 72 bytes (not 240) as it re-wired to a statically allocated empty key-space (C-code)
- # Note 14: popitem() as of python 3.7 is now guaranteed LIFO removal as the insertion order is guaranteed as per Note: 2
+ # Note 14: .popitem() as of python 3.7 is now guaranteed LIFO removal as the insertion order is guaranteed as per Note: 2
+ # Note 15: .update() performs an in-place update, returning None (just like list appending etc)
+ # Note 16: .update() overrides existing keys with the newer value, non existent keys will be added
+ # Note 17: dict **kwargs instantiation is only viable when the keys are simple strings
+
 
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
@@ -26,6 +30,7 @@ dict_c = {'a': 'A', 'b': 'B'} # dict of length 2, passing in literal values
 dict_from_tuples = {[("Hello" , 7), ("hi" , 10), ("there" , 45),("at" , 23),("this" , 77)]} # dict of len 5
 dict_from_only_keys = dict.fromkeys(['one', 'two', 'three'], 'default') # dict of len 3 (all values 'default')
 dict_from_zipped_lists = dict(zip(['a', 'b', 'c'], [1,2,3])) # dict of len 3, from 2x zipped lists
+dict_simple_strings = dict(one=1, two=2)
 
 -------------------------------------------------------------------------------------------------------------
 # Operations
@@ -35,11 +40,13 @@ the_dict.clear() # completely empties the dictionary, leaving an empty dictionar
 the_dict.copy() # creates a 'shallow' copy of the items, by shallow copy we mean the contents of the dictionary is not copied by value, instead just creating a new reference
 the_dict.fromkeys() # creates a new dictionary from a sequence of 'keys', value= can be set to override the default of None
 the_dict.get() # retrieve an item from the dictionary, returns None if the key is not found, so no KeyError raised, supports a default value
-the_dict.items() # returns an instance of dict_items (view) which
-the_dict.keys() # returns an instance of dict_keys (view) which
-the_dict.values() # returns an instance of dict_values (view) which
+the_dict.items() # returns an instance of dict_items (Dynamic View) which
+the_dict.keys() # returns an instance of dict_keys (Dynamic View) which
+the_dict.values() # returns an instance of dict_values (Dynamic View) which
 the_dict.pop() # removes the specified key in the dictionary and returns its value.  Raises a KeyError on non existent key, unless default is provided
 the_dict.popitem() # removes the last entry of a dict, returning its key and value pair in a tuple, returns KeyError if dict is empty
+the_dict.setdefault() # insert a key with value of default= if the key does not exist, else return the value for the key if it exists (else default)
+the_dict.update() # performs an in-place update to the dict (@caveat: returns None), update expects an iterable of: k:v pairs, another dict or **kwargs (non existent keys are added)
 -------------------------------------------------------------------------------------------------------------
 # Operations in action
 dict.clear():
@@ -95,6 +102,39 @@ dict.popitem():
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     KeyError: 'popitem(): dictionary is empty'
+```
+
+dict.setdefault():
+
+```python
+    >>> d = {1:1, 2:2, 3:3}
+    >>> d.setdefault(4, 'default')
+    'default'
+    >>> d
+    {1: 1, 2: 2, 3: 3, 4: 'default'}
+    >>> d.setdefault(3, 'default') # 3 exists so lets get '3'
+    3
+    >>> d
+    {1: 1, 2: 2, 3: 3, 4: 'default'}
+```
+
+dict.update():
+
+```python
+    >>> upd8_dict = dict(one=1, two=2, three=3)
+    >>> upd8_dict.update(dict(two=20, four=4))
+    >>> upd8_dict
+    {'one': 1, 'two': 20, 'three': 3, 'four': 4}
+
+    >>> upd8_kwargs = dict(one=1, two=2, three=3)
+    >>> upd8_kwargs.update(dict(two=20, four=4))
+    >>> upd8_kwargs
+    {'one': 1, 'two': 20, 'three': 3, 'four': 4}
+
+    >>> keyvalue = {1: 100, 2: 200, 3: 300}
+    >>> keyvalue.update([(1, 1000), (2, 2000), (3, 3000)])
+    >>> keyvalue
+    {1: 1000, 2: 2000, 3: 3000}
 ```
 
 -------------------------------------------------------------------------------------------------------------
