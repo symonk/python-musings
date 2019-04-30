@@ -23,7 +23,11 @@
  # Note 18: Dictionary views (keys, items, values) are a 'window' into the dict and reflect any change(s) in real time. they are iterable and do not build lists when iterating
  # Note 19: Even with python3 view efficiency changes, `x in dict` is king for checking if a key exists in a dictionary
  # Note 20: Always favour {} over dict() unless {} does not fit your use case, performance gains (while minor) can be had
- # Note 21: Dictionary comps are more 'pythonic' that lambdas, they are also more efficient
+ # Note 21: Dictionary comps are more 'pythonic' that lambdas, Guido the author has contemplated removing functional functions altogether (filter, reduce, map etc)
+ # Note 22: OrderedDict is not 'worthless' after python 3.7 (LIFO on dicts), because it offers things which standard dicts to not (move_to_end(), reversed() etc)
+ # Note 23: Incoming Python 3.8 will see the introduction of reversed() iteration on standard dictionaries
+ # Note 24: __slots__ dunder method can be implemented to disable object backed dictionaries, saving RAM
+
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
 empty_dict_a = dict() # empty dict
@@ -245,8 +249,36 @@ dict_comp = {key: key * 10 for key in range(0, 100)}
 
 -------------------------------------------------------------------------------------------------------------
 # Various flavours of dictionaries
+# The OrderedDict:
+# The ordered dictionary, while mostly deprecated as of python 3.7 has some difference, equality takes into account
+# insertion order, this is demonstrated below:
 
-# orderedDict, chained etc
+```python
+    >>> d1 = dict(a='A', b='B', c='C')
+    >>> d2 = dict(b='B', a='A', c='C')
+    >>> d1 == d2 # normal dict evaluates these as True (equality)
+    True
+    >>> d3 = collections.OrderedDict(d1)
+    >>> d4 = collections.OrderedDict(d2)
+    >>> d3 == d4
+    False
+```
+
+# Another reason to keep OrderedDict in play post python 3.7 is its capabilities of move_to_end() (de-queue behaviour):
+
+```python
+    >>> d = OrderedDict.fromkeys('abcde', 25)
+    >>> d.move_to_end('b')
+    >>> d
+    OrderedDict([('a', 25), ('c', 25), ('d', 25), ('e', 25), ('b', 25)])
+    >>> d.move_to_end('b', last=False)
+    >>> d
+    OrderedDict([('b', 25), ('a', 25), ('c', 25), ('d', 25), ('e', 25)])
+    >>>
+```
+
+
+
 
 -------------------------------------------------------------------------------------------------------------
 # Simple problems with dictionaries, with solutions
@@ -255,3 +287,26 @@ dict_comp = {key: key * 10 for key in range(0, 100)}
 # More on hashing, how it works and the collision algorithm explained
 
 -------------------------------------------------------------------------------------------------------------
+
+# Misc
+# __slots__: In Python every single class can have attribuetes, these are stored in a dictionary, this allows setting of
+# arbitrary attributes at runtime etc, however its memory intensize and dicts can be wasteful on RAM.  By implementing
+# __slots__ = in your classes you can tell python not to use a dictionary under the hood and assign enough memory to
+# allocate space for a fixed set of attributes, see below how __slots__ can be implemented:
+
+
+```python
+    >>> class Car: # without slots!
+    ...     def __init__(self, a: int = 1, b: int = 2):
+    ...             self.a = a
+    ...             self.b = b
+```
+
+```python
+    >>> class Car: # with slots!
+    ...     __slots__ = ['a', 'b']
+    ...     def __init__(self, a: int = 1, b: int = 2):
+    ...             self.a = a
+    ...             self.b = b
+```
+
