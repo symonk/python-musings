@@ -27,6 +27,8 @@
  # Note 22: OrderedDict is not 'worthless' after python 3.7 (LIFO on dicts), because it offers things which standard dicts to not (move_to_end(), reversed() etc)
  # Note 23: Incoming Python 3.8 will see the introduction of reversed() iteration on standard dictionaries
  # Note 24: __slots__ dunder method can be implemented to disable object backed dictionaries, saving RAM
+ # Note 25: Pythons implicit dictionary resizing (at 66% fullness) applies 4x the size when len() is under 50,000, then 2x after
+ # Note 26: As of python 3.6 the memory usage is wayyy down on dictionaries compared to previously
 
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
@@ -250,7 +252,7 @@ dict_comp = {key: key * 10 for key in range(0, 100)}
 -------------------------------------------------------------------------------------------------------------
 # Various flavours of dictionaries
 # The OrderedDict:
-# The ordered dictionary, while mostly deprecated as of python 3.7 has some difference, equality takes into account
+# The ordered dictionary, while mostly deprecated as of python 3.7 has some differences, equality takes into account
 # insertion order, this is demonstrated below:
 
 ```python
@@ -277,9 +279,6 @@ dict_comp = {key: key * 10 for key in range(0, 100)}
     >>>
 ```
 
-
-
-
 -------------------------------------------------------------------------------------------------------------
 # Simple problems with dictionaries, with solutions
 
@@ -289,11 +288,10 @@ dict_comp = {key: key * 10 for key in range(0, 100)}
 -------------------------------------------------------------------------------------------------------------
 
 # Misc
-# __slots__: In Python every single class can have attribuetes, these are stored in a dictionary, this allows setting of
-# arbitrary attributes at runtime etc, however its memory intensize and dicts can be wasteful on RAM.  By implementing
+# __slots__: In Python every single class can have attributes, these are stored in a dictionary, this allows setting of
+# arbitrary attributes at runtime etc, however its memory intensive and dicts can be wasteful on RAM.  By implementing
 # __slots__ = in your classes you can tell python not to use a dictionary under the hood and assign enough memory to
 # allocate space for a fixed set of attributes, see below how __slots__ can be implemented:
-
 
 ```python
     >>> class Car: # without slots!
@@ -309,4 +307,19 @@ dict_comp = {key: key * 10 for key in range(0, 100)}
     ...             self.a = a
     ...             self.b = b
 ```
+
+# Dictionary resizing:
+# As we know, the dict by default starts with enough space to store 8 items, the resizing algorithm is outlined below:
+if dict exceeds 66% fullness:
+    if total count of dict items is less than 50,000:
+        increase the dict capacity by 4x
+    else:
+        increase the dict capacity by 2x
+
+# This is outlined in the below example:
+
+
+
+
+
 
