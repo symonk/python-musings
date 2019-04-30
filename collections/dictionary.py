@@ -23,7 +23,7 @@
  # Note 18: Dictionary views (keys, items, values) are a 'window' into the dict and reflect any change(s) in real time. they are iterable and do not build lists when iterating
  # Note 19: Even with python3 view efficiency changes, `x in dict` is king for checking if a key exists in a dictionary
  # Note 20: Always favour {} over dict() unless {} does not fit your use case, performance gains (while minor) can be had
-
+ # Note 21: Dictionary comps are more 'pythonic' that lambdas, they are also more efficient
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
 empty_dict_a = dict() # empty dict
@@ -231,6 +231,15 @@ dict_comp = {key: key * 10 for key in range(0, 100)}
      730, 74: 740, 75: 750, 76: 760, 77: 770, 78: 780, 79: 790, 80: 800, 81: 810, 82
     : 820, 83: 830, 84: 840, 85: 850, 86: 860, 87: 870, 88: 880, 89: 890, 90: 900, 9
     1: 910, 92: 920, 93: 930, 94: 940, 95: 950, 96: 960, 97: 970, 98: 980, 99: 990}
+    >>>
+```
+
+```python
+    >>> d1 = dict(one=1, two=2, three=3)
+    >>> d2 = dict(four=4, five=5, six=6)
+    >>> comp = {k:v for k,v in (zip(d1.keys(), d2.values()))}
+    >>> comp
+    {'one': 4, 'two': 5, 'three': 6}
     >>>
 ```
 
