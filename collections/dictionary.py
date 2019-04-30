@@ -29,6 +29,7 @@
  # Note 24: __slots__ dunder method can be implemented to disable object backed dictionaries, saving RAM
  # Note 25: Pythons implicit dictionary resizing (at 66% fullness) applies 4x the size when len() is under 50,000, then 2x after
  # Note 26: As of python 3.6 the memory usage is wayyy down on dictionaries compared to previously
+ # Note 27: As of python 3.8 the _asdict() of a namedtuple now returns a dict instead of a collections.OrderedDict
 
 -------------------------------------------------------------------------------------------------------------
 # Instantiation:
