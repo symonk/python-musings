@@ -18,17 +18,23 @@ find_items = {1,2,3,4,5}
 
 # Removing duplicates:
 dupe_list = [1,1,2,3,4,4]
-unique_items = set(dupe_list)
->>> unique_items -> {1, 2, 3, 4}
+unique_items = set(dupe_list) >>> unique_items -> {1, 2, 3, 4}
 
 # How to instantiate sets (see notes on using {} to instantiate an empty set!)
 my_set = set() # Empty set -> type(my_set) -> <class 'set'>
 my_other_set = {1,2,3,4,5} # set of len(5) -> <class 'set'>
 comprehension_set = {x for x in range(1,10)}
 >>> comprehension_set -> {1, 2, 3, 4, 5, 6, 7, 8, 9} >>> type(comprehension_set) -> <class 'set'>
-
+set_from_iterable:
+>>> set([1,2,3]) -> {1, 2, 3}
+>>> set({'one': 1, 'two': 2}.keys()) -> {'one', 'two'}
 
 # Set operations
+# >>> Operation name: 'add()' | Args:
+
+
+
+
 'add', 'clear', 'copy', 'difference', \
 'difference_update', 'discard', 'intersection',\
 'intersection_update', 'isdisjoint',
