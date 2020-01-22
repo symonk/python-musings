@@ -25,25 +25,25 @@ In [2]: abs(-100)
 Out[2]: 100
 
 # complex abs
-In [4]: my_complex = 2+3j
+In [3]: my_complex = 2+3j
 
-In [5]: type(my_complex)
-Out[5]: complex
+In [4]: type(my_complex)
+Out[4]: complex
 
-In [6]: abs(my_complex)
-Out[6]: 3.605551275463989
+In [5]: abs(my_complex)
+Out[5]: 3.605551275463989
 
 # floating abs
-In [1]: abs(-100.252)
-Out[1]: 100.252
+In [6]: abs(-100.252)
+Out[6]: 100.252
 
 # custom obj abs and __abs__
-In [16]: class Custom:
+In [17]: class Custom:
     ...:     def __abs__(self):
     ...:         return 1000
 
-In [17]: abs(Custom())
-Out[17]: 1000
+In [18]: abs(Custom())
+Out[18]: 1000
 
 ```
 
