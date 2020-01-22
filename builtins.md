@@ -33,7 +33,9 @@ Out[5]: complex
 In [6]: abs(my_complex)
 Out[6]: 3.605551275463989
 
-
+# floating abs
+In [1]: abs(-100.252)
+Out[1]: 100.252
 
 # custom obj abs and __abs__
 In [16]: class Custom:
