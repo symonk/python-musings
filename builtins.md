@@ -50,5 +50,66 @@ Out[18]: 1000
 ---
 
 ### all()
+ - Returns True if an iterable is either empty or all elements in the iterable are True
+ - Equivalent to the following for loop:
+ 
+ ```python
+     def all(iterable):
+        for element in iterable:
+            if not element:
+                return False
+        return True
+```
+
+```python
+# simple any 
+In [2]: all([False, True])
+Out[2]: False
+
+In [3]: all([True, True])
+Out[3]: True
+
+In [4]: all([])
+Out[4]: True
+
+# any with expression
+In [5]: all(role.istitle() for role in ['King', 'Queen', 'Jester'])
+Out[5]: True
+
+```
+
+---
+
+### any()
+ - Returns True if any of an iterables elements are True, however returns False if the iterable is empty
+ - Equivalent to the following for loop:
+ 
+  ```python
+     def any(iterable):
+        for element in iterable:
+            if element:
+                return True
+        return False
+```
+
+```python
+In [6]: any([False, True])
+Out[6]: True
+
+In [7]: any([False, False])
+Out[7]: False
+
+In [8]: any([])
+Out[8]: False
+
+In [9]: any(role.istitle() for role in ['King', 'queen', 'jEster'])
+Out[9]: True
+
+```
+
+--- 
+
+### ascii()
+
 
 
