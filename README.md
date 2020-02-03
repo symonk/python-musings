@@ -1,3 +1,1 @@
-# Python cross training documentation
-
-I correlate anything of interest here while cross training in python, hopefully you can learn a thing or two too
+[![Documentation Status](https://readthedocs.org/projects/learning-python-3/badge/?version=latest)](https://learning-python-3.readthedocs.io/en/latest/?badge=latest)
