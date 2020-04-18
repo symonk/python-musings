@@ -83,3 +83,57 @@ Yikes! ^ all instances have been secretly change(d) and persist the value
 
 """
 
+"""
+no non-None is permitted to be returned from __init__(), doing so will raise a TypeError as shown below:
+"""
+
+
+class ReturnInInit:
+    def __init__(self):
+        return True
+
+
+print('----')
+a = ReturnInInit()
+
+"""
+Traceback (most recent call last):
+  File "C:/workspace/learning-python/dunder_methods/dunder_init.py", line 97, in <module>
+    a = ReturnInInit()
+TypeError: __init__() should return None, not 'bool'
+"""
+
+"""
+When dealing with inheritance in python, it is explicitly required that super() inits are invoked in the derived classes.
+This is demonstrated below:
+
+"""
+
+
+class Base:
+    def __init__(self, *a, **kw):
+        print('This is base')
+
+
+class A(Base):
+    def __init__(self, *a, **kw):
+        print('I wont invoke super')
+
+
+class B(Base):
+    def __init__(self, *a, **kw):
+        print('I will invoke super')
+        super().__init__(*a, **kw)
+
+
+new_a = A()
+new_b = B()
+
+"""
+Results in:
+
+I wont invoke super
+I will invoke super
+This is base
+
+"""
