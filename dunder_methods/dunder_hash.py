@@ -117,3 +117,30 @@ False
 {<__main__.HashAndEq object at 0x000002217B181B38>, <__main__.HashAndEq object at 0x000002217B181BA8>}
 
 """
+
+"""
+You may be wondering why you can use your custom object as a dict key off the bat with no hash implementation,
+That is because python implements one for you.  Lets demonstrate:
+"""
+
+
+class Default:
+    pass
+
+
+d = {Default(): 10}
+print('----')
+print(d)  # this is actually alright...
+print(hash(Default()))
+d[[1, 2, 3]] = 20  # this is not, list is not hashable
+print(d)
+
+"""
+Results in:
+
+Traceback (most recent call last):
+  File "C:/workspace/learning-python/dunder_methods/dunder_hash.py", line 135, in <module>
+    d[[1, 2, 3]] = 20  # this is not, list is not hashable
+TypeError: unhashable type: 'list'
+
+"""
