@@ -1,10 +1,10 @@
-.. Learning Python 3+ documentation master file, created by
-   sphinx-quickstart on Mon Feb  3 17:18:02 2020.
+.. python-learning documentation master file, created by
+   sphinx-quickstart on Fri Jun 12 21:41:41 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Learning Python 3+'s documentation!
-==============================================
+Welcome to python-learning's documentation!
+===========================================
 
 .. toctree::
    :maxdepth: 2
