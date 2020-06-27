@@ -20,7 +20,7 @@
 'ss'
 
 
-# .centre(width, [, fillchar])
+# .center(width, [, fillchar])
 # If the len of the string is less than width; just return the string.  Otherwise return the centred string
 # with the fillchar padding;  by default ASCII space.
 
