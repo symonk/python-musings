@@ -18,3 +18,19 @@
 'ß'
 >>> already_lower.casefold()
 'ss'
+
+
+# .centre(width, [, fillchar])
+# If the len of the string is less than width; just return the string.  Otherwise return the centred string
+# with the fillchar padding;  by default ASCII space.
+
+>>> default = "default"
+>>> default.center(25)
+'         default         '
+
+>>> padding = 'padding'
+>>> padding.center(25, '*')
+'*********padding*********'
+
+
+#
