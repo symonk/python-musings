@@ -33,4 +33,12 @@
 '*********padding*********'
 
 
-#
+#  .count(substring[, start[, end]])
+# returns the number of non overlapping substrings found in the string in the given range
+# optional args start, end are interpreted as slice notation
+>>> words = 'one two three one two three onesie'
+>>> words.count('one')
+3
+>>> words.count('one', 0, 4)
+1
+
