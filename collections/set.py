@@ -251,6 +251,38 @@ some_list = [1,2,20,210,6,100]
 
 """
 
+"""
+set difference(*others) function:
+set x - y function:
+ - The difference() function, also implemented through the __sub__ / __rsub__ dunder method of sets returns a new
+ - set with the different items from set X which do not appear in others.  This is outlined below:
+ 
+ # difference() can be called without argument and in this instance, will return the set of x:
+    >>> x = set([1,2,3,4,5,6])
+    >>> x.difference()
+    {1, 2, 3, 4, 5, 6}
+    # note this is equal to x.difference(set())
+    
+    >>> other_x = set([1,3,5,7,9])
+    >>> other_y = set([2,4,6,8,10])
+    >>> x - other_x
+    {2, 4, 6}
+    >>> x - other_y
+    {1, 3, 5}
+    
+    # Applying difference to multiple *others:
+    >>> x = {1,2,3,4,5,6,7,8,9,10,1337}
+    >>> x.difference(other_x, other_y)
+    {1337}
+    
+    # Same as:
+    >>> x - other_x - other_y
+    {1337}
+    
+    -- Big O Notation: x.difference(y) is equivalent to O(len(x) - len(y))
+
+"""
+
 ------------------------------------------------------------------------------
 
 """
@@ -262,4 +294,6 @@ TLDR Notes:
 # By default, resizing occurs when the set is 60%~ (TODO FIX THIS) full? seems to resize 3.5x its size?
 # Sets cannot guarantee the order of elements, resizing etc can shift the order completely
 # Comparison of sets, cares not about order of elements - only the elements within explicitly.
+# set.difference() returns a set with the elements from x that are not in *others
+# set.difference() is equivalent to using '-' (x - y - z) and this is due to a dunder __sub__ implementation
 """
