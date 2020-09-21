@@ -292,6 +292,165 @@ set difference_update(*others) function:
 
 ------------------------------------------------------------------------------
 
+"""
+frozen set vs set functions & public interface:
+
+# using sets to remove duplicates! :)
+
+difference = set(dir(set()).difference(set(dir(frozenset())))
+
+    >>> print(difference)
+    {'__iand__',
+     '__ior__',
+     '__isub__',
+     '__ixor__',
+     'add',
+     'clear',
+     'difference_update',
+     'discard',
+     'intersection_update',
+     'pop',
+     'remove',
+     'symmetric_difference_update',
+     'update'}
+     
+     # As we can see above, frozen sets being immutable they cannot modify the set after creation!
+     # It is still possible for things like x.difference(y) where x is type: frozenset
+     # However, note the __isub__ dunder difference, x -= y (surprisingly?) does actually work... but it returns
+     # a new frozenset under such circumstances.
+     # This is because when dunder __isub__ is not implemented on an object, the dunder __sub__ is a fallback
+     
+     >>> class Augment:
+    ...     def __sub__(self, other):
+    ...             print('dunder sub')
+    ...     def __isub__(self, other):
+    ...             print('dunder isub')
+    ...
+    ...
+    >>> var = Augment()
+    >>> var - None
+    'dunder sub'
+    >>> var -= None
+    'dunder isub'
+    
+    >>> class NoAugment:
+    ...     def __sub__(self, other):
+    ...             print('normal dunder sub...')
+    ...
+    ...
+    >>> var = NoAugment()
+    >>> var -= None
+    'normal dunder sub...'
+    
+     # Here we can see, frozenset class does NOT have an implementation of dunder isub:
+     >>> print(dir(frozenset()))
+    ['__and__',
+     '__class__',
+     '__contains__',
+     '__delattr__',
+     '__dir__',
+     '__doc__',
+     '__eq__',
+     '__format__',
+     '__ge__',
+     '__getattribute__',
+     '__gt__',
+     '__hash__',
+     '__init__',
+     '__init_subclass__',
+     '__iter__',
+     '__le__',
+     '__len__',
+     '__lt__',
+     '__ne__',
+     '__new__',
+     '__or__',
+     '__rand__',
+     '__reduce__',
+     '__reduce_ex__',
+     '__repr__',
+     '__ror__',
+     '__rsub__',
+     '__rxor__',
+     '__setattr__',
+     '__sizeof__',
+     '__str__',
+     '__sub__',
+     '__subclasshook__',
+     '__xor__',
+     'copy',
+     'difference',
+     'intersection',
+     'isdisjoint',
+     'issubset',
+     'issuperset',
+     'symmetric_difference',
+     'union']
+     
+     # and set() does:
+     >>> print(dir(set()))
+    ['__and__',
+     '__class__',
+     '__contains__',
+     '__delattr__',
+     '__dir__',
+     '__doc__',
+     '__eq__',
+     '__format__',
+     '__ge__',
+     '__getattribute__',
+     '__gt__',
+     '__hash__',
+     '__iand__',
+     '__init__',
+     '__init_subclass__',
+     '__ior__',
+     '__isub__',
+     '__iter__',
+     '__ixor__',
+     '__le__',
+     '__len__',
+     '__lt__',
+     '__ne__',
+     '__new__',
+     '__or__',
+     '__rand__',
+     '__reduce__',
+     '__reduce_ex__',
+     '__repr__',
+     '__ror__',
+     '__rsub__',
+     '__rxor__',
+     '__setattr__',
+     '__sizeof__',
+     '__str__',
+     '__sub__',
+     '__subclasshook__',
+     '__xor__',
+     'add',
+     'clear',
+     'copy',
+     'difference',
+     'difference_update',
+     'discard',
+     'intersection',
+     'intersection_update',
+     'isdisjoint',
+     'issubset',
+     'issuperset',
+     'pop',
+     'remove',
+     'symmetric_difference',
+     'symmetric_difference_update',
+     'union',
+     'update']
+     
+     So when we ask a frozen set to perform -= it actually falls back to performing x - y and returns a new frozenset.
+     
+"""
+
+------------------------------------------------------------------------------
+
 
 """
 Guarantee of set order cannot be assured.  Sets by default are length 8 in size, after filling to a certain percentage
