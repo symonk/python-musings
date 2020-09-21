@@ -320,6 +320,13 @@ set intersection(*others) function:
     >>> var = x.intersection(z)
     >>> var
     {3, 4, 5}
+ - When using multiple *others, it returns a new set with elements that are in x and all of *others
+ >>> x = {1,2,3,4,5}
+    >>> y = {3,4,5}
+    >>> z = {3,6,7}
+    >>> # This should return {3} as its the only value in all 3
+    >>> x & y & z
+    {3}
     
  - # __and__, __rand__, __iand__ operators brief explanation:
      >>> class DunderAnd:
@@ -341,6 +348,41 @@ set intersection(*others) function:
     'infix-and'
  
 """
+
+"""
+set intersection_difference(*others) function:
+    ...TODO
+
+"""
+
+"""
+set isdisjoint(other) function:
+    ...TODO
+    
+"""
+
+"""
+set issubset(other) function:
+    ...TODO
+"""
+
+"""
+set issuperset(other) function:
+    ...TODO
+"""
+
+"""
+set pop(elem) function:
+    ...TODO
+"""
+
+"""
+set remove(elem) function:
+    ...TODO
+"""
+
+------------------------------------------------------------------------------
+
 
 """
 Guarantee of set order cannot be assured.  Sets by default are length 8 in size, after filling to a certain percentage
@@ -546,5 +588,5 @@ TLDR Notes:
 # set.difference() returns a set with the elements from x that are not in *others
 # set.difference() is equivalent to using '-' (x - y - z) and this is due to a dunder __sub__ implementation
 # set.intersection() returns a set with the elements from x that are also in *others
-# set.intersection() is equivalent to using '&' (x & y & z) and this is due to a dunder __x__ implementation
+# set.intersection() is equivalent to using '&' (x & y & z) and this is due to a dunder __and__ implementation
 """
