@@ -535,6 +535,7 @@ difference = set(dir(set()).difference(set(dir(frozenset())))
 
 """
 TLDR Notes:
+# Stores hashable, immutable, unordered elements
 # Two types of built in set (set() / frozenset())
 # Create sets using set(iterable), frozenset(iterable), {n,...}
 # By default, empty braces will create a dictionary (care) = {} # Type Dict, not an empty set!
