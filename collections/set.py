@@ -453,6 +453,19 @@ difference = set(dir(set()).difference(set(dir(frozenset())))
 
 
 """
+set discard(elem) function:
+ - Discards an element from the set
+ - Unlike remove(elem), does NOT raise a KeyError if the elem is not present in the set
+    >>> x = {1,2,3}
+    >>> x.discard(4)
+    >>> x.remove(4)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    KeyError: 4
+ -- Big O Notation: Discarding (like removing) an element from the set is constant time O(1).
+"""
+
+"""
 Guarantee of set order cannot be assured.  Sets by default are length 8 in size, after filling to a certain percentage
 the order in which.  Here we can see the set resizing when the 5th element is added:
 
