@@ -40,5 +40,17 @@ TypeError: unhashable type: 'set'
 ------------------------------------------------------------------------------
 
 """
-A set by definition (Set Theory) is a collection 
+A set by definition (Set Theory) is an unordered collection of distinct, hashable elements.
+The core benefits of sets in python are:
+ - Extremely fast 'in' checks, 'x' in {'x', 'y', 'z'} for example
+ - Remove duplicates from other collections
+ - Applying various mathematically operations, such as union & intersection etc.
+ 
+Sets out of the box support len(set), for x in set:, x in set.  Notably, sets are NOT sequences so index lookup,
+slice notation and other sequence like behaviour.  Importantly sets cannot guarantee the order of elements.  Sets do 
+not keep track of order of insertion, or current order of elements.  Instead they use the hash of elements to compute
+where the object A) should be placed and B) should be retrieved from extremely fast. 
+
 """
+
+------------------------------------------------------------------------------
