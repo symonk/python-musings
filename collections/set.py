@@ -54,3 +54,49 @@ where the object A) should be placed and B) should be retrieved from extremely f
 """
 
 ------------------------------------------------------------------------------
+
+"""
+Sets can be constructed through two main methods, firstly using the curly braces:
+
+>>> my_set = {1,2,3,4}
+>>> type(my_set)
+<class 'set'>
+
+>>> my_set = set([1,2,3,4])
+>>> type(my_set)
+<class 'set'>
+
+The core difference in these two approaches is that using the set constructor approach explicitly (set(iterable))
+only accepts a single, (optional) iterable item, whereas with the braces approach, all items should be explicitly
+passed in.  Note: A set CANNOT hold references to A) dictionaries and B) Lists because those two types are non hashable
+due to their mutable nature.  This is shown below:
+
+>>> my_dict = dict(a=1, b=2, c=3)
+>>> new_set = {my_dict}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'dict'
+
+>>> my_list = [_ for _ in range(100)]
+>>> my_set = set()
+>>> my_set.add(my_list)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+
+Note: Lists are an iterable, as are dictionaries (by default on keys) so this approach works just fine:
+
+>>> immutable_list = [_ for _ in range(5)]
+>>> immutable_dict = {'a': 1, 'b': 2}
+>>> my_set = set(immutable_list)
+>>> my_set
+{0, 1, 2, 3, 4}
+>>> my_set = set(immutable_dict)
+>>> my_set
+{'a', 'b'}
+
+As you an see above, both of these mutable types are infact, iterables so they can be unpacked into the set.
+
+"""
+
+------------------------------------------------------------------------------
