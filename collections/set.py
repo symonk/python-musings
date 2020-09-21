@@ -228,7 +228,6 @@ set x - y function:
     >>> x = set([1,2,3,4,5,6])
     >>> x.difference()
     {1, 2, 3, 4, 5, 6}
-    # note this is equal to x.difference(set())
 
     >>> other_x = set([1,3,5,7,9])
     >>> other_y = set([2,4,6,8,10])
@@ -288,6 +287,88 @@ set difference_update(*others) function:
     >>> x -= y
     >>> id(x)
     1517543478656
+"""
+
+"""
+set discard(elem) function:
+ - Discards an element from the set
+ - Unlike remove(elem), does NOT raise a KeyError if the elem is not present in the set
+    >>> x = {1,2,3}
+    >>> x.discard(4)
+    >>> x.remove(4)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    KeyError: 4
+ -- Big O Notation: Discarding (like removing) an element from the set is constant time O(1).
+"""
+
+"""
+set intersection(*others) function:
+ - Return a new set with elements common in set X and sets *others.
+ - x.intersection() returns x
+ - x & y is equal to x.intersection(y)
+ - intersection dunder methods are: __and__, __rand__, __iand__
+    >>> x = {1,2,3,4,5}
+    >>> y = {6,7}
+    >>> z = {3,4,5,6}
+    >>>
+    >>> x.intersection()
+    {1, 2, 3, 4, 5}
+    >>> var = x.intersection(y)
+    >>> var
+    set()
+    >>> var = x.intersection(z)
+    >>> var
+    {3, 4, 5}
+    
+ - # __and__, __rand__, __iand__ operators brief explanation:
+     >>> class DunderAnd:
+    ...     def __and__(self, val):
+    ...             print('and')
+    ...     def __rand__(self, val):
+    ...             print('r-and')
+    ...     def __iand__(self, val):
+    ...             print('infix-and')
+    ...
+    >>>
+    >>>
+    >>> var = DunderAnd()
+    >>> var & None
+    'and'
+    >>> None & var
+    'r-and'
+    >>> var &= None
+    'infix-and'
+ 
+"""
+
+"""
+Guarantee of set order cannot be assured.  Sets by default are length 8 in size, after filling to a certain percentage
+the order in which.  Here we can see the set resizing when the 5th element is added:
+
+    >>> x = set()
+    >>> get_size(x)
+    216
+    >>> x.add(1)
+    >>> x.add(2)
+    >>> x.add(3)
+    >>> x.add(4)
+    >>> get_size(x)
+    216
+    >>> pprint(x)
+    {1, 2, 3, 4}
+    # Still 216 bytes until we add one more:
+
+    >>> x.add(5)
+    >>> get_size(x)
+    728  # Finally resized! Note this resizing looks to approximately 3.37~ %
+
+    We can see that the order of the iterable is not guaranteed within sets in python:
+    some_list = [1,2,20,210,6,100]
+    >>> some_list = [1,2,20,210,6,100]
+    >>> set(some_list)
+    {1, 2, 100, 6, 210, 20} # not the same as the sequenced list
+
 """
 
 ------------------------------------------------------------------------------
@@ -453,51 +534,6 @@ difference = set(dir(set()).difference(set(dir(frozenset())))
 
 
 """
-set discard(elem) function:
- - Discards an element from the set
- - Unlike remove(elem), does NOT raise a KeyError if the elem is not present in the set
-    >>> x = {1,2,3}
-    >>> x.discard(4)
-    >>> x.remove(4)
-    Traceback (most recent call last):
-      File "<stdin>", line 1, in <module>
-    KeyError: 4
- -- Big O Notation: Discarding (like removing) an element from the set is constant time O(1).
-"""
-
-"""
-Guarantee of set order cannot be assured.  Sets by default are length 8 in size, after filling to a certain percentage
-the order in which.  Here we can see the set resizing when the 5th element is added:
-
-    >>> x = set()
-    >>> get_size(x)
-    216
-    >>> x.add(1)
-    >>> x.add(2)
-    >>> x.add(3)
-    >>> x.add(4)
-    >>> get_size(x)
-    216
-    >>> pprint(x)
-    {1, 2, 3, 4}
-    # Still 216 bytes until we add one more:
-    
-    >>> x.add(5)
-    >>> get_size(x)
-    728  # Finally resized! Note this resizing looks to approximately 3.37~ %
-    
-    We can see that the order of the iterable is not guaranteed within sets in python:
-    some_list = [1,2,20,210,6,100]
-    >>> some_list = [1,2,20,210,6,100]
-    >>> set(some_list)
-    {1, 2, 100, 6, 210, 20} # not the same as the sequenced list
-
-"""
-
-
-------------------------------------------------------------------------------
-
-"""
 TLDR Notes:
 # Two types of built in set (set() / frozenset())
 # Create sets using set(iterable), frozenset(iterable), {n,...}
@@ -508,4 +544,6 @@ TLDR Notes:
 # Comparison of sets, cares not about order of elements - only the elements within explicitly.
 # set.difference() returns a set with the elements from x that are not in *others
 # set.difference() is equivalent to using '-' (x - y - z) and this is due to a dunder __sub__ implementation
+# set.intersection() returns a set with the elements from x that are also in *others
+# set.intersection() is equivalent to using '&' (x & y & z) and this is due to a dunder __x__ implementation
 """
