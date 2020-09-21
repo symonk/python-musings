@@ -116,20 +116,140 @@ This applies to both sets and frozen sets
 ------------------------------------------------------------------------------
 
 """
-Python set methods are outlined below:
+Python set methods [excluding dunder / private]:
 
-['__and__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', 
-'__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__iand__', '__init__', 
-'__init_subclass__', '__ior__', '__isub__', '__iter__', '__ixor__', '__le__', '__len__', 
-'__lt__', '__ne__', '__new__', '__or__', '__rand__', '__reduce__', '__reduce_ex__', 
-'__repr__', '__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeof__', '__str__', 
-'__sub__', '__subclasshook__', '__xor__', 'add', 'clear', 'copy', 'difference', 
-'difference_update', 'discard', 'intersection', 'intersection_update', 'isdisjoint', 
-'issubset', 'issuperset', 'pop', 'remove', 'symmetric_difference', 'symmetric_difference_update', 
-'union', 'update']
+>>> pprint(set_interface)
+['add',
+ 'clear',
+ 'copy',
+ 'difference',
+ 'difference_update',
+ 'discard',
+ 'intersection',
+ 'intersection_update',
+ 'isdisjoint',
+ 'issubset',
+ 'issuperset',
+ 'pop',
+ 'remove',
+ 'symmetric_difference',
+ 'symmetric_difference_update',
+ 'union',
+ 'update']
 
 """
 
+
+"""
+set add(elem) function:
+ - Add a new (hashable, immutable) element to the set
+ - Elements cannot be added at a particular index and the set has no record of where elements are
+ - If the element already exists, nothing happens
+ -- args: elem (the element to be added, if element already exists nothing happens)
+ -- returns: None
+ -- Big O: adding to a python set is O(1) constant. note: it is possible to hit collisions (multiple) times making a 
+ -- completely worst case o(n).
+
+"""
+
+"""
+set clear() function:
+ - Remove all elements from the set
+ - This resizes the set accordingly as outlined below:
+ 
+     >>> x = set([_ for _ in range(100)])
+    >>> get_size(x)
+    8408
+    >>> x.clear()
+    >>> get_size(x)
+    216
+
+-- Big O: Clearing the set is a constant operation at: O(1). similar to x = set()
+ 
+"""
+
+
+"""
+set copy() function:
+ - Creates a shallow copy of the set (not a deep copy!)
+    >>> one = set([1,2,3,5,6,7])
+    >>> two = one.copy()
+    >>> from sys import getrefcount
+    >>> getrefcount(one)
+    2
+    >>> getrefcount(two)
+    2
+    >>> one.add(8)
+    >>> two
+    {1, 2, 3, 5, 6, 7}
+    >>> # vs the assignment approach
+    >>>
+    >>> one = set([1,2,3,4,5,6,7])
+    >>> two = one
+    >>> getrefcount(one)
+    3
+    >>> getrefcount(two)
+    3
+    >>> # see the same references ^
+    >>> one.add(8)
+    >>> one
+    {1, 2, 3, 4, 5, 6, 7, 8}
+    >>> # two will also have 8
+    >>> two
+    {1, 2, 3, 4, 5, 6, 7, 8}
+    
+    >>> class ShallowCopy:
+...     def __init__(self, x: int) -> None:
+...             self.x = x
+...
+    >>> one = ShallowCopy(100)
+    >>> var = {one}
+    >>> var2 = var.copy()
+    >>> for x in var:
+    ...     print(id(x))
+    ...
+    1623954326816
+    >>> for x in var2:))
+    ...     print(id(x))
+    ...
+    1623954326816
+    
+    -- Big O Notation: Due to having to iterate the set to copy, copy() is O(N), linear
+
+"""
+
+
+------------------------------------------------------------------------------
+
+
+"""
+Guarantee of set order cannot be assured.  Sets by default are length 8 in size, after filling to a certain percentage
+the order in which.  Here we can see the set resizing when the 5th element is added:
+
+>>> x = set()
+>>> get_size(x)
+216
+>>> x.add(1)
+>>> x.add(2)
+>>> x.add(3)
+>>> x.add(4)
+>>> get_size(x)
+216
+>>> pprint(x)
+{1, 2, 3, 4}
+# Still 216 bytes until we add one more:
+
+>>> x.add(5)
+>>> get_size(x)
+728  # Finally resized! Note this resizing looks to approximately 3.37~ %
+
+We can see that the order of the iterable is not guaranteed within sets in python:
+some_list = [1,2,20,210,6,100]
+>>> some_list = [1,2,20,210,6,100]
+>>> set(some_list)
+{1, 2, 100, 6, 210, 20} # not the same as the sequenced list
+
+"""
 
 ------------------------------------------------------------------------------
 
@@ -140,4 +260,6 @@ TLDR Notes:
 # By default, empty braces will create a dictionary (care) = {} # Type Dict, not an empty set!
 # By default, python sets are allocated sizing for 8 elements. 
 # By default, resizing occurs when the set is 60%~ (TODO FIX THIS) full? seems to resize 3.5x its size?
+# Sets cannot guarantee the order of elements, resizing etc can shift the order completely
+# Comparison of sets, cares not about order of elements - only the elements within explicitly.
 """
