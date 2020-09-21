@@ -218,6 +218,77 @@ set copy() function:
 
 """
 
+"""
+set difference(*others) function:
+set x - y function:
+ - The difference() function, also implemented through the __sub__ / __rsub__ dunder method of sets returns a new
+ - set with the different items from set X which do not appear in others.  This is outlined below:
+
+ # difference() can be called without argument and in this instance, will return the set of x:
+    >>> x = set([1,2,3,4,5,6])
+    >>> x.difference()
+    {1, 2, 3, 4, 5, 6}
+    # note this is equal to x.difference(set())
+
+    >>> other_x = set([1,3,5,7,9])
+    >>> other_y = set([2,4,6,8,10])
+    >>> x - other_x
+    {2, 4, 6}
+    >>> x - other_y
+    {1, 3, 5}
+
+    # Applying difference to multiple *others:
+    >>> x = {1,2,3,4,5,6,7,8,9,10,1337}
+    >>> x.difference(other_x, other_y)
+    {1337}
+
+    # Same as:
+    >>> x - other_x - other_y
+    {1337}
+
+    -- Big O Notation: x.difference(y) is equivalent to O(len(x) - len(y))
+
+"""
+
+"""
+set difference_update(*others) function:
+ - Update set X to remove items in *others. 
+ - note: This updates X and does not create a new set
+ - note: infix operator -= is equivalent of x.difference_update(y).  This is outlined below:
+ 
+    >>> x = set([1,2,3,4,5,6])
+    >>> y = set([100,200,300,5,6])
+    >>> x.difference_update(y)
+    >>> x
+    {1, 2, 3, 4}
+    >>> z = set([1,2,3,4,5,6])
+    >>> z -= y
+    >>> z
+    {1, 2, 3, 4}
+    >>> z == x
+    True
+    
+    # Here you can see the difference explicitly in x - y vs x-= y
+    >>> x = {100, 200, 300}
+    >>> y = {300, 400, 500}
+    >>> z = x.copy()
+    >>>
+    >>>
+    >>> x
+    {200, 100, 300}
+    >>> y
+    {400, 300, 500}
+    >>> z
+    {200, 100, 300}
+    >>> x - y
+    {200, 100}
+    >>> new = x - y
+    >>> id(new)
+    1517543477984
+    >>> x -= y
+    >>> id(x)
+    1517543478656
+"""
 
 ------------------------------------------------------------------------------
 
@@ -226,62 +297,31 @@ set copy() function:
 Guarantee of set order cannot be assured.  Sets by default are length 8 in size, after filling to a certain percentage
 the order in which.  Here we can see the set resizing when the 5th element is added:
 
->>> x = set()
->>> get_size(x)
-216
->>> x.add(1)
->>> x.add(2)
->>> x.add(3)
->>> x.add(4)
->>> get_size(x)
-216
->>> pprint(x)
-{1, 2, 3, 4}
-# Still 216 bytes until we add one more:
-
->>> x.add(5)
->>> get_size(x)
-728  # Finally resized! Note this resizing looks to approximately 3.37~ %
-
-We can see that the order of the iterable is not guaranteed within sets in python:
-some_list = [1,2,20,210,6,100]
->>> some_list = [1,2,20,210,6,100]
->>> set(some_list)
-{1, 2, 100, 6, 210, 20} # not the same as the sequenced list
+    >>> x = set()
+    >>> get_size(x)
+    216
+    >>> x.add(1)
+    >>> x.add(2)
+    >>> x.add(3)
+    >>> x.add(4)
+    >>> get_size(x)
+    216
+    >>> pprint(x)
+    {1, 2, 3, 4}
+    # Still 216 bytes until we add one more:
+    
+    >>> x.add(5)
+    >>> get_size(x)
+    728  # Finally resized! Note this resizing looks to approximately 3.37~ %
+    
+    We can see that the order of the iterable is not guaranteed within sets in python:
+    some_list = [1,2,20,210,6,100]
+    >>> some_list = [1,2,20,210,6,100]
+    >>> set(some_list)
+    {1, 2, 100, 6, 210, 20} # not the same as the sequenced list
 
 """
 
-"""
-set difference(*others) function:
-set x - y function:
- - The difference() function, also implemented through the __sub__ / __rsub__ dunder method of sets returns a new
- - set with the different items from set X which do not appear in others.  This is outlined below:
- 
- # difference() can be called without argument and in this instance, will return the set of x:
-    >>> x = set([1,2,3,4,5,6])
-    >>> x.difference()
-    {1, 2, 3, 4, 5, 6}
-    # note this is equal to x.difference(set())
-    
-    >>> other_x = set([1,3,5,7,9])
-    >>> other_y = set([2,4,6,8,10])
-    >>> x - other_x
-    {2, 4, 6}
-    >>> x - other_y
-    {1, 3, 5}
-    
-    # Applying difference to multiple *others:
-    >>> x = {1,2,3,4,5,6,7,8,9,10,1337}
-    >>> x.difference(other_x, other_y)
-    {1337}
-    
-    # Same as:
-    >>> x - other_x - other_y
-    {1337}
-    
-    -- Big O Notation: x.difference(y) is equivalent to O(len(x) - len(y))
-
-"""
 
 ------------------------------------------------------------------------------
 
