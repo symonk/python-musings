@@ -2,6 +2,8 @@
 Python offers two flavours of built in sets, these are sets and frozen sets.
 As you can imagine, frozen sets are themselves immutable and thus hashable so can be stored inside other sets
 and also used as dictionary keys.  By default, sets are mutable as we can add elements to them etc.
+
+Note: For TLDR Notes, please reference the end of this file.
 """
 
 # Demonstration of mutability, hashability and frozen sets as hashable keys / set elements
@@ -100,3 +102,42 @@ As you an see above, both of these mutable types are infact, iterables so they c
 """
 
 ------------------------------------------------------------------------------
+
+"""
+By default as of python 3.8.5, sets are 216 bytes in size when empty.
+This applies to both sets and frozen sets
+
+>>> get_size(set())
+216
+>>> get_size(frozenset())
+216
+"""
+
+------------------------------------------------------------------------------
+
+"""
+Python set methods are outlined below:
+
+['__and__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', 
+'__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__iand__', '__init__', 
+'__init_subclass__', '__ior__', '__isub__', '__iter__', '__ixor__', '__le__', '__len__', 
+'__lt__', '__ne__', '__new__', '__or__', '__rand__', '__reduce__', '__reduce_ex__', 
+'__repr__', '__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeof__', '__str__', 
+'__sub__', '__subclasshook__', '__xor__', 'add', 'clear', 'copy', 'difference', 
+'difference_update', 'discard', 'intersection', 'intersection_update', 'isdisjoint', 
+'issubset', 'issuperset', 'pop', 'remove', 'symmetric_difference', 'symmetric_difference_update', 
+'union', 'update']
+
+"""
+
+
+------------------------------------------------------------------------------
+
+"""
+TLDR Notes:
+# Two types of built in set (set() / frozenset())
+# Create sets using set(iterable), frozenset(iterable), {n,...}
+# By default, empty braces will create a dictionary (care) = {} # Type Dict, not an empty set!
+# By default, python sets are allocated sizing for 8 elements. 
+# By default, resizing occurs when the set is 60%~ (TODO FIX THIS) full? seems to resize 3.5x its size?
+"""
