@@ -404,7 +404,17 @@ set isdisjoint(other) function:
 
 """
 set issubset(other) function:
-    ...TODO
+ - Returns True if all elements of x are in y
+ - x is then considered a subset of y, this is outlined below:
+    In [46]: x = {1,2,3}; y = {2,3,4}
+    In [47]: x.issubset(y)
+    Out[47]: False
+    In [48]: x = {1,2,3}; y = {1,2,3,4,5}
+    In [49]: x.issubset(y)
+    Out[49]: True
+ - This also works with any iterable:
+    In [50]: x.issubset([1,2,3,4,5,6,7])
+    Out[50]: True    
 """
 
 """
