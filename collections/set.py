@@ -505,6 +505,39 @@ set remove(elem) function:
     KeyError: '0'
 """
 
+"""
+set symmetric_difference(other) function:
+ - symmetric_difference is the elements in EITHER x OR y but not in both
+ - symmetric_difference is the equivalent of x ^ y
+ - x.symmetric_difference(y) returns a new set, not to be confused with modifying x in-place (^=)
+    In [92]: x = {1,2,3,4,5}; y = {6,7,8,9,10}
+    In [93]: var = x.symmetric_difference(y)
+    In [94]: var
+    Out[94]: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+ - An example of when sets are the same:
+    In [95]: same_x = {1,2,3,4}; same_y = [1,2,3,4]
+    In [96]: same_x.symmetric_difference(same_y)
+    Out[96]: set()
+"""
+
+"""
+set symmetric_difference_update() function:
+ - TODO
+
+"""
+
+"""
+set union() function:
+ - TODO
+
+"""
+
+"""
+set update(other) function:
+ - TODO
+
+"""
+
 ------------------------------------------------------------------------------
 
 
