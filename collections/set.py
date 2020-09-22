@@ -422,22 +422,87 @@ set issubset(other) function:
     Out[61]: True
     In [62]: x < x # False because x is equal to x
     Out[62]: False
- 
 """
 
 """
 set issuperset(other) function:
-    ...TODO
+ - You can think of superset as the opposite of subset, every element in y is in x:
+ - >= is not a 'proper' check, but confirms if all elements in y are in x
+ - x > y is a 'proper' check and enforces that x is not equal to y (x != y and x >= y)
+    In [65]: x = {1,2,3,4,5}
+    In [66]: y = {3,4,5}
+    In [67]: x >= x # True
+    Out[67]: True
+    In [68]: x >= x # False
+    Out[68]: True
+    In [69]: x >= y # True
+    Out[69]: True
+    In [70]: x > y # True
+    Out[70]: True
+    In [71]: x < y # False
+    Out[71]: False
 """
 
 """
-set pop(elem) function:
-    ...TODO
+set pop() function:
+ - Pop an item out of the set
+ - As you know, sets do NOT keep track of order, so popping by index is not supported
+ - Unlike other pop() counter parts, no default can be specified and KeyError if the set is empty
+    In [76]: x = set('abcdefghijklmnopqrstuvwxyz')
+    In [77]: x.pop()
+    Out[77]: 'e'
+    In [78]: x.pop()
+    Out[78]: 'q'
+    In [79]: x.pop()
+    Out[79]: 'x'
+    In [80]: x.pop()
+    Out[80]: 't'
+    In [81]: x
+    Out[81]:
+    {'a',
+    'b',
+    'c',
+    'd',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'r',
+    's',
+    'u',
+    'v',
+    'w',
+    'y',
+    'z'}
+ - Empty set popping:
+    In [82]: x = set()
+    In [83]: x.pop()
+    ---------------------------------------------------------------------------
+    KeyError                                  Traceback (most recent call last)
+    <ipython-input-83-22e0729a7b70> in <module>
+    ----> 1 x.pop()
 """
 
 """
 set remove(elem) function:
-    ...TODO
+ - removes element 'elem' from the set
+ - if elem does not exist within the set, a KeyError is raised
+    In [86]: from string import ascii_letters   
+    In [87]: x = set(ascii_letters)
+    In [88]: x.remove('0')
+    ---------------------------------------------------------------------------
+    KeyError                                  Traceback (most recent call last)
+    <ipython-input-88-f39020323f74> in <module>
+    ----> 1 x.remove('0')
+    
+    KeyError: '0'
 """
 
 ------------------------------------------------------------------------------
