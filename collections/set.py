@@ -523,23 +523,6 @@ set symmetric_difference(other) function:
     In [100]: var = x ^ y
     In [101]: var
     Out[101]: {1, 2, 3, 4, 5, 6}
- - ^ operation is handled by the dunder __XOR__ methods:
-    In [105]: class XOR:
-     ...:     def __xor__(self, other):
-     ...:         print('xor')
-     ...:     def __rxor__(self, other):
-     ...:         print('right xor')
-     ...:     def __ixor__(self, other):
-     ...:         print('inplace xor')
-     ...:
-    In [107]: x = XOR()
-    In [108]: x ^ None
-    xor
-    In [109]: x ^= None
-    inplace xor
-     
-     
-    
 """
 
 """
