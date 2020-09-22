@@ -532,14 +532,48 @@ set symmetric_difference_update() function:
 """
 
 """
-set union() function:
- - TODO
-
+set union(others*) function:
+ - x.union(other) returns a new set, containing all items from both x and other
+ - x.union(other) can also be written as x | other (OR)
+ - Some examples are shown below:
+    In [1]: x = {1,2,3,4,'hello'}
+    In [2]: y = {'world', 4,3,2,1,0}
+    In [3]: new = x | y
+    In [4]: new
+    Out[4]: {0, 1, 2, 3, 4, 'hello', 'world'}
+    
+ - Multiple chained unions:
+    In [6]: x | {1,2,3} | {4,5,6,7}
+    Out[6]: {1, 2, 3, 4, 5, 6, 7, 'hello'}
+    
+ - Union with multiple others:
+    In [8]: a = {1,2,3}
+    In [9]: b = {4,5,6}
+    In [10]: c = {7,8,9}
+    In [11]: a.union(b,c)
+    Out[11]: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 """
 
 """
-set update(other) function:
- - TODO
+set update(others*) function:
+ - Given an iterable of others, add all elements in each iterable into the set x
+ - x.update(y, z)
+ - operator implementation can be used like: x |= y | z
+ - Some examples of this are shown below:
+ - Modifying x in place:
+    In [12]: x = {1,2,3,4,5}; y = {1,2,3,4,5,6}
+    In [13]: x.update(y)
+    In [14]: x
+    Out[14]: {1, 2, 3, 4, 5, 6}
+ - Modifying x in place with multiple iterables:
+    In [16]: a = {1,2,3}; b = {4,5,6}; c = {7,8,9}
+    In [17]: a.update(b,c)
+    In [18]: a
+    Out[18]: {1, 2, 3, 4, 5, 6, 7, 8, 9}
+ - Modifying x in place with multiple iterables using the operator syntax:
+    In [21]: a |= set('hello') | set('world')
+    In [22]: a
+    Out[22]: {'d', 'e', 'h', 'l', 'o', 'r', 'w'}
 
 """
 
@@ -752,5 +786,5 @@ TLDR Notes:
 # set.intersection() returns a set with the elements from x that are also in *others
 # set.intersection() is equivalent to using '&' (x & y & z) and this is due to a dunder __and__ implementation
 # set.intersection_update(*others) can also be written x &= y & z where x is now items in x AND y AND z
-
+# non-operator methods of union, difference, intersection, symmetric_difference, issubset, issuperset will accept any iterable
 """
