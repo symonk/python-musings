@@ -414,7 +414,15 @@ set issubset(other) function:
     Out[49]: True
  - This also works with any iterable:
     In [50]: x.issubset([1,2,3,4,5,6,7])
-    Out[50]: True    
+    Out[50]: True 
+ - x <= y tests if every element in x is in y
+ - x < y tests for proper subsets, where every element of x is in y and x != y (see below):
+    In [60]: x = {1,2,3,4,5}
+    In [61]: x <= x # True
+    Out[61]: True
+    In [62]: x < x # False because x is equal to x
+    Out[62]: False
+ 
 """
 
 """
