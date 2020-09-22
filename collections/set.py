@@ -351,7 +351,21 @@ set intersection(*others) function:
 
 """
 set intersection_difference(*others) function:
-    ...TODO
+ - Update set x keeping only elements found in it and in all of *others
+ - x.intersection_difference(*others) updates x in place with elements in x AND y
+ - x &= y &= z modifies x in place with items that are in x AND Y AND z
+    In [9]: x = {1,2,3,4,5}
+    In [10]: y = {1,2,3}
+    In [11]: x.intersection_update(y)
+    In [12]: x
+    Out[12]: {1, 2, 3}
+ 
+    In [13]: x = {1,2,3}
+    In [14]: y = {2}
+    In [15]: z = {2,3}
+    In [17]: x &= y & z
+    In [18]: x
+    Out[18]: {2}
 
 """
 
@@ -582,11 +596,13 @@ TLDR Notes:
 # Create sets using set(iterable), frozenset(iterable), {n,...}
 # By default, empty braces will create a dictionary (care) = {} # Type Dict, not an empty set!
 # By default, python sets are allocated sizing for 8 elements. 
-# By default, resizing occurs when the set is 60%~ (TODO FIX THIS) full? seems to resize 3.5x its size?
+# By default, resizing occurs when the set is 66%~ (TODO FIX THIS) full? seems to resize 3.5x its size?
 # Sets cannot guarantee the order of elements, resizing etc can shift the order completely
 # Comparison of sets, cares not about order of elements - only the elements within explicitly.
 # set.difference() returns a set with the elements from x that are not in *others
 # set.difference() is equivalent to using '-' (x - y - z) and this is due to a dunder __sub__ implementation
 # set.intersection() returns a set with the elements from x that are also in *others
 # set.intersection() is equivalent to using '&' (x & y & z) and this is due to a dunder __and__ implementation
+# set.intersection_update(*others) can also be written x &= y & z where x is now items in x AND y AND z
+
 """
