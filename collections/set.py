@@ -371,8 +371,35 @@ set intersection_difference(*others) function:
 
 """
 set isdisjoint(other) function:
-    ...TODO
+ - x.isdisjoint(other) returns True if the x.intersection(y) would be an empty set.
+ - if x has no elements in common with y, then we say x is disjoint of y
+    In [19]: disjoint = {1,2,3,4,5} 
+    In [20]: y = {6,7,8,9}
+    In [21]: disjoint.isdisjoint(y)
+    Out[21]: True
+    In [22]: disjoint.isdisjoint(set())
+    Out[22]: True
+    In [23]: disjoint.isdisjoint({4})
+    Out[23]: False
+ - isdisjoint(other) accepts any type which implements the iterator protocol
+    In [34]: x = {1,2,3}; y = [3,4,5]
+    In [35]: x.isdisjoint(y)
+    Out[35]: False
+    In [36]: x = {1,3,5}; y = (5,7,9)
+    In [37]: x.isdisjoint(y)
+    Out[37]: False
+    In [40]: x = {'d', 'o'}
+    In [41]: x.isdisjoint('word')
+    Out[41]: False # interesting :)
+ - Attempting when a type which is not iterable is passed:
+    In [42]: class A: pass 
+    In [44]: x.isdisjoint(A())
+    ---------------------------------------------------------------------------
+    TypeError                                 Traceback (most recent call last)
+    <ipython-input-44-2abc63912fb4> in <module>
+    ----> 1 x.isdisjoint(A())
     
+    TypeError: 'A' object is not iterable
 """
 
 """
