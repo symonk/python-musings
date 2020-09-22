@@ -526,8 +526,22 @@ set symmetric_difference(other) function:
 """
 
 """
-set symmetric_difference_update() function:
- - TODO
+set symmetric_difference_update(other) function:
+ - similar to x.symmetric_difference(y) except updates set x in place.
+ - returns None implicitly
+ - updates x in place with elements from other which are not in x: x.symmetric_difference_update(y)
+    In [23]: x = {1,2,3}
+    In [24]: y = {3,4,5}
+    In [25]: x.symmetric_difference_update(y)
+    In [26]: x
+    Out[26]: {1, 2, 4, 5}
+ - Can be written using the dunder ixor implementation for multiple other sets, example below:
+    In [27]: one = {1,2,3}  
+    In [28]: two = {4,5,6}  
+    In [29]: three = {3,6,7}  
+    In [30]: one ^= two ^ three  
+    In [31]: one
+    Out[31]: {1, 2, 4, 5, 7}
 
 """
 
