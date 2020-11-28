@@ -34,7 +34,7 @@ def basic_example_lambda() -> None:
 def false_filter_example() -> None:
     # itertools can offer a predicate (False) alternative, this is displayed below:
     from itertools import filterfalse
-    numbers_not_divisible_by_five = list(filter(lambda x: x % 5 != 0, range(1000)))
+    numbers_not_divisible_by_five = list(filterfalse(lambda x: x % 5 != 0, range(1000)))
     print(numbers_not_divisible_by_five)
 
 
@@ -42,5 +42,3 @@ if __name__ == '__main__':
     basic_example()
     basic_example_lambda()
     false_filter_example()
-
-
