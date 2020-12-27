@@ -46,5 +46,22 @@ def demonstrate_reference_count() -> None:
     del one  # ref count = 0, __del__ called.
 
 
+class WarningOnly:
+    def __del__(self) -> None:
+        print(100 / 0)
+
+
+def warn_on_del_exceptions() -> None:
+    """
+    Due to some limitations, if exceptions are raised in a dunder __del__ implementation, a warning is emitted by
+    python to stderr.
+    :return: None
+    """
+    x = WarningOnly()
+    del x
+    # Exception ignored by python, Traceback printed to stderr
+
+
 if __name__ == '__main__':
     demonstrate_reference_count()
+    warn_on_del_exceptions()
