@@ -1,6 +1,6 @@
 from collections import defaultdict
 """
-__missing__ is only applicable for subclasses of dictionaries, noticibly the defaultdict (collections.defaultdict) which
+__missing__ is only applicable for subclasses of dictionaries, notably the defaultdict (collections.defaultdict) which
 accepts a default_factory= callable to its constructor (__new__ -> __init__).  When a default_factory callable is not
 supplied, upon key misses as part of __getitem__ then subsequently __missing__ a KeyError is raised.  However, passing a
 callable (such as a lambda) to `default_factory=lambda: 1337` then such function is called rather than raising a KeyError
