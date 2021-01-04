@@ -8,7 +8,7 @@ value.
 
 If a class does not define dunder __bool__() OR dunder __len__() then all of its instances are considered
 `True`.
-
+"""
 
 class Both:
   """
