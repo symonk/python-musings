@@ -10,6 +10,7 @@ __repr__() is used for debugging and should be unambiguous.
 """
 
 class Train:
+  
   def __init__(self, wheels: int, color: str, power_mechanism: str) -> None:
     self.wheels = wheels
     self.color = color
@@ -20,8 +21,25 @@ class Train:
      
  def __repr__(self) -> str:
     return f"Train(wheels={self.wheels}, color={self.color}, power_mechanism={self.power_mechanism})"
+  
+  
+class TrainTwo:
+  
+  def __init__(self, wheels: int, color: str, power_mechanism: str) -> None:
+    self.wheels = wheels
+    self.color = color
+    self.power_mechanism = power_mechanism
+   
+ # When __str__() is not implemented; repr is called in place by the builtins (print|str|format)
+ def __repr__(self) -> str:
+    return f"Train(wheels={self.wheels}, color={self.color}, power_mechanism={self.power_mechanism})"
+
     
-    
-  train = Train(36, 'red', 'steam')
-  str(train)  # 'A steam train with: 36 wheels'
-  repr(train)  # 'Train(wheels=36, color=red, power_mechanism=steam)
+train = Train(36, 'red', 'steam')
+str(train)  # 'A steam train with: 36 wheels'
+repr(train)  # 'Train(wheels=36, color=red, power_mechanism=steam)
+
+train_two = TrainTwo(100, 'green', 'electric')
+print(train_two)  # TrainTwo(wheels=100, color=green, power_mechanism=electric)
+str(train_two)  # TrainTwo(wheels=100, color=green, power_mechanism=electric)
+"formatted: {}".format(train_two)  # TrainTwo(wheels=100, color=green, power_mechanism=electric)
