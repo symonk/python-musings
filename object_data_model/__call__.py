@@ -24,7 +24,7 @@ calling_instanze = calling_clazz()  # My instance got called
 
 issubclass(CallableInstance, Callable)  # virtual subclasses by Callable __subclass_hook__() has occurred and thats how this is viable.
 
-"""
+
 class Callable(metaclass=ABCMeta):
 
     __slots__ = ()
@@ -40,4 +40,9 @@ class Callable(metaclass=ABCMeta):
         return NotImplemented
 
     __class_getitem__ = classmethod(_CallableGenericAlias)
-"""
+
+    
+class NoCall:
+  ...
+  
+NoCall()() # TypeError: NoCall object is not callable
