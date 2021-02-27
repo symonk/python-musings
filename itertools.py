@@ -147,6 +147,90 @@ clean, concise and understandable.  This highlights a key fact:
     
 Implementing it the long winded way to begin with, helps to grasp the concepts under the 
 hood and expected contract of the iterator protocol.
+
+Moving on to more realistic iterator examples, because who wants to iterate forever
+really? The use case is pretty small.
+
+You are probably pondering (again) how can we signal when an iterator is exhausted
+and should stop returning values and the answer to that is quite unique, it all
+boils down to the `StopIteration` exception which is used to signal the end.
+
+Using the python built ins we can easily see what is going on under the hood:
+"""
+
+def built_in_iter() -> None:
+    x = iter(range(3))
+    print(next(x))
+    print(next(x))
+    print(next(x))
+    print(next(x))
+
+"""
+---------------------------------------------------------------------------
+StopIteration                             Traceback (most recent call last)
+<ipython-input-4-a2816fdfbc1a> in <module>
+----> 1 built()
+
+<ipython-input-3-5afbb6d48dee> in built_in_iter()
+      4     print(next(x))
+      5     print(next(x))
+----> 6     print(next(x))
+      7
+
+StopIteration:
+
+"""
+
+
+class BoundedIterable:
+    def __init__(self, attempts):
+        self.attempts = attempts
+        self.tally = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.tally == self.attempts:
+            raise StopIteration
+        self.tally += 1
+        return self.tally
+
+"""
+Let's try out our BoundedIterable, based on the number of attempts we pass into
+its constructor,
+"""
+
+def bounded():
+    attempts = 3
+    it = iter(BoundedIterable(attempts))
+    print(next(it))
+    print(next(it))
+    print(next(it))
+    print(next(it))
+
+"""
+bounded()
+---------------------------------------------------------------------------
+StopIteration                             Traceback (most recent call last)
+<ipython-input-17-f6e8ae88637a> in <module>
+----> 1 bounded()
+
+<ipython-input-16-e16e1a260943> in bounded()
+      5     print(next(it))
+      6     print(next(it))
+----> 7     print(next(it))
+      8
+
+<ipython-input-9-377374344e41> in __next__(self)
+      9     def __next__(self):
+     10         if self.tally > self.attempts:
+---> 11             raise StopIteration
+     12         self.tally += 1
+     13         return self.tally
+
+StopIteration:
+
 """
 
 
