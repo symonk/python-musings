@@ -1,4 +1,8 @@
+from __future__ import annotations
+
+import random
 import string
+from typing import Iterable, Any
 
 """
 The itertools module exposes a number of iterator building blocks.  The exposed functions
@@ -50,11 +54,68 @@ of crisp you are going to get next! but it's all you can eat regardless.
 outlined below:
 """
 class CrispPacket:
-    def __init__(self) -> None:
-        self.flavour = "salted"
+    flavours = ("beef", "cheese and onion", "salt and vinegar", "steak")
+
+    def __iter__(self) -> CrispPacketIterator:
+        return CrispPacketIterator(self)
 
 
+class CrispPacketIterator:
 
+    def __init__(self, source: CrispPacket) -> None:
+        self.source = source
+
+    def __next__(self) -> str:
+        return random.choice(self.source.flavours)
+
+
+def the_hello_world_of_iterators() -> None:
+    """
+    Here we will instantiate an instance of our CrispPacket
+    and use it with a for in loop.  This will create a
+    randomised indefinite output to stdout:
+        cheese and onion
+        cheese and onion
+        steak
+        cheese and onion
+        salt and vinegar
+        beef
+        salt and vinegar
+        salt and vinegar
+        cheese and onion
+        ... and so on and so fourth, indefinitely
+    :return: None
+    """
+    for flavour in CrispPacket():
+        print(flavour)
+
+
+"""
+That's great, but still confusing to look at, lets understand how for in loops actually function in python.
+To break down the `for in` for our example (infinite and printing), similar code is outlined below:
+"""
+
+def infinite_printing_for_in(obj: Any) -> None:
+    """
+    Given an object, get an iterator for the object using the built in iter function.
+    Under the hood this invokes dunder __iter__ on custom objects, returning an iterator
+    while True (loop forever), fetch the next item from the iterator by using the
+    built in next() function, which under the hood invokes dunder __next__ on the iterator.
+    :param obj: Any object implementing the iterator protocol
+    :return: None
+    """
+    it = iter(obj)
+    while True:
+        print(next(it))
+
+
+"""
+And here in lies the first benefit of iterators (and the itertools building blocks) to recreate
+something like our example in a simple python list is technically impossible, memory will
+eventually be exhausted, there is no way to store infinite values in a list, this is what makes
+iterators and iterables a fantastic concept, with some very powerful use cases.  Think of them
+for now as objects that promote lazy/deferred iteration.
+"""
 
 
 # Infinite Iterators
