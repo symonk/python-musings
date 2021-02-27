@@ -1,0 +1,29 @@
+"""
+Namedtuple is a `tuple` subclass in python which adds support for attribute
+lookup by attribute name as well as being both indexable and iterable.
+Instances of namedtuple also come with a nice dunder __repr__ and docstring.
+"""
+
+from collections import namedtuple
+
+Simon = namedtuple("Simon", "name age height")
+
+simon = Simon("simon", 20, "5'10")
+
+# ---
+
+# Named tuple arguments explained.
+# collections.namedtuple(typename, field_names, *, rename=False, defaults=None, module=None)
+# As we can see from the signature, rename; defaults & module must be `keyword arguments` only.
+
+
+# 1.0 Full Example
+t = namedtuple(typename="t", field_names="a,b,c", rename=False, defaults=None, module=None)
+t_instance = t(100, 200, 300)
+# t(a=100, b=200, c=300)
+
+# 1.1 Attempting to create `t` without keyword args, raises a SyntaxError
+# The reason this works like this, is because of the `*` defined in the named tuple signature.
+# This means, everything after this `*` is a keyword only argument.
+t = namedtuple("t", "a b c", False, None, None)
+# TypeError: namedtuple() takes 2 positional arguments but 5 were given
