@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import random
+import itertools
 import string
-from typing import Iterable, Any
+from typing import Any
 
 """
 The itertools module exposes a number of iterator building blocks.  The exposed functions
@@ -244,3 +245,18 @@ Infinite Iterators:
     
     Problem statement: You work for the 
 """
+
+def count(start: float = 0, step: float = 1) -> int:
+    """
+    Creates an iterator, that increments start by stop on
+    each iteration, often used for mapping data points.
+    :param start: The starting point, defaulting to 0
+    :param stop: The incremental step, defaulting to 1
+    :return: yields start += step on each iteration
+
+    Note: step can be a negative number and count can happily
+    iterate into the negative number space.  Both start and step
+    can be floating point numbers also.
+    """
+    for number in itertools.count(100, 100):
+        print(number)
