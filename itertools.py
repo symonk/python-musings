@@ -115,6 +115,38 @@ something like our example in a simple python list is technically impossible, me
 eventually be exhausted, there is no way to store infinite values in a list, this is what makes
 iterators and iterables a fantastic concept, with some very powerful use cases.  Think of them
 for now as objects that promote lazy/deferred iteration.
+
+You have probably pondered, why the need for multiple classes here?  Combining them into one class
+is completely possible and advisable, however there is a caveat that we will discuss soon.  For now
+just understand that the Iterator protocol only cares that whatever is returned by the objects
+dunder __iter__ has an implementation of dunder __new__.  While thinking about this keep in the 
+back of your mind that everytime we iterate over an iterable, it should be a fresh, this is where
+people often make mistakes.
+
+Lets simplify our CrispPacket class by making it implement both protocol methods and bin the 
+concept of a CrispPacketIterator class.
+"""
+
+class ImprovedCrispPacket:
+    flavours = ("beef", "cheese and onion", "salt and vinegar", "steak")
+
+    def __iter__(self) -> ImprovedCrispPacket:
+        return self
+
+    def __next__(self) -> str:
+        return random.choice(self.flavours)
+
+
+"""
+Pretty successful, we have removed the need for an isolated Iterator class, returning
+self from iter guarantees that we are returning an object which implements dunder next.
+clean, concise and understandable.  This highlights a key fact:
+
+    -> All Iterators are iterables
+    -> Not all Iterables, are Iterators
+    
+Implementing it the long winded way to begin with, helps to grasp the concepts under the 
+hood and expected contract of the iterator protocol.
 """
 
 
