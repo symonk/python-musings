@@ -3,8 +3,8 @@ Dunder __call__() is called when the object is called, similar to a function do_
 By default classes are callable; however by implementing dunder __call__() instances can become callable.
 
 collections.abc.Callable can be used to check if something is callable; like a lot of the collections
-modules in python it relies on virtual subclass registration to determine this, as even classes
-which do not directly subclass Callable are known as callable.
+modules in python it relies on use of __subclasshook__ dunder method to smartly check if something is
+considered callable or not.
 
 calling () on a instance which does not implement dunder __call__() will raise a TypeError `object is not callable`
 """
@@ -12,37 +12,25 @@ calling () on a instance which does not implement dunder __call__() will raise a
 
 from collections.abc import Callable
 
-
-class CallableInstance:
-  def __call__(self) -> None:
-    print("My instance got called")
-    
-    
-    
-calling_clazz = CallableInstance()
-calling_instanze = calling_clazz()  # My instance got called
-
-issubclass(CallableInstance, Callable)  # virtual subclasses by Callable __subclass_hook__() has occurred and thats how this is viable.
+"""
+By default, classes are `Callable`, however to provide our own functionality to an instance of our classes
+we can implement dunder `__call__` as outlined below:
+"""
 
 
-class Callable(metaclass=ABCMeta):
+class MyClass:
+    pass
 
-    __slots__ = ()
 
-    @abstractmethod
-    def __call__(self, *args, **kwds):
-        return False
+print(callable(MyClass))  # True
+print(callable(MyClass()))  # False
 
-    @classmethod
-    def __subclasshook__(cls, C):
-        if cls is Callable:
-            return _check_methods(C, "__call__")
-        return NotImplemented
 
-    __class_getitem__ = classmethod(_CallableGenericAlias)
+class MyNewClass:
+    def __call__(self, *args, **kwargs):
+        return "foobar" in kwargs
 
-    
-class NoCall:
-  ...
-  
-NoCall()() # TypeError: NoCall object is not callable
+
+print(callable(MyNewClass))  # True
+print(callable(MyNewClass()))  # True
+print(MyNewClass()(foo=1, bar=2, foobar=3))  # True!
